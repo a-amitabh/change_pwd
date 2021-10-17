@@ -6,7 +6,7 @@ def verifyPassword():
 def changePassword(oldPassword, newPassword):
     if verifyPassword():
         val = pwd_validator.PasswordValidator(oldPassword, newPassword)
-        print(val.validate_all())
+        val.validate_all()
         if val.validated is False:
             #print("Password not changed")
             return False
