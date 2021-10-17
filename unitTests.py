@@ -29,12 +29,14 @@ class TestPwdChange(unittest.TestCase):
         self.assertFalse(changePassword.changePassword("ABCDXYZabcdxyz@123123", "abcd2222ABCDXYZ!@#$1234"))
         self.assertFalse(changePassword.changePassword("ABCDXYZabcdxyz@123123", "abcdxyz@@ABCD@@XYZ!@#$1234"))
         self.assertFalse(changePassword.changePassword("ABCDXYZabcdxyz@123123", "abcdAAAAABCDXYZ!@#$1234"))
+        self.assertTrue(changePassword.changePassword("ABCDXYZabcdxyz@123123", "abcdAAABCDXYZ###$111234"))
 
     """Test to validate limitation on number of spec chars"""
     def test_SpecCharLimit(self):
         self.assertFalse(changePassword.changePassword("ABCDXYZabcdxyz@123123", "abcdxyzABCDXYZ@#!@@1234"))
+        self.assertTrue(changePassword.changePassword("ABCDXYZabcdxyz@123123", "abcdxyzABCDXYZ@#!@1234"))
 
-    """Tests to validate limit on percentage chars in password being numbers """
+    """Tests to validate limit on percentage of chars in password which are numbers """
     def test_numCountLimit(self):
         self.assertFalse(changePassword.changePassword("ABCDXYZabcdxyz@123123", "1234567891ABCDabcd@"))
         self.assertTrue(changePassword.changePassword("ABCDXYZabcdxyz@123123", "123456789AABCDabcd@"))
@@ -42,6 +44,7 @@ class TestPwdChange(unittest.TestCase):
     """Test to validate that password with greater than 80% simmilarity are not allowed"""
     def test_PwdDissimilarity(self):
         self.assertFalse(changePassword.changePassword("ABCDXYZabcdxyz@123123", "12CDXYZabcdxyz@123AB"))
+        self.assertTrue(changePassword.changePassword("ABCDXYZabcdxyz@123123", "12CDXYZabcdxyz@12AB"))
 
 
 if __name__ ==  '__main__':
