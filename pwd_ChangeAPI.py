@@ -8,6 +8,5 @@ def chg_pwd(curr_pwd, new_pwd):
     print(type(changePassword.changePassword(curr_pwd, new_pwd)))
     return str(changePassword.changePassword(curr_pwd, new_pwd))
 
-
 if __name__ == "__main__":
     app.run(debug=True)
